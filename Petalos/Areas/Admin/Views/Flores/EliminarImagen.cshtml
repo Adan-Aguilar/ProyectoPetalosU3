@@ -1,0 +1,32 @@
+﻿@model Petalos.Models.Imagenesflore
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+@{ Layout = "_Layout"; }
+
+<div style="width:100%" >
+
+    <p style="color:#2483A6;font-size:20px;width: 100%; text-align: center; font-size: larger; display: block;">¿Seguro de eliminar la imagen <b>@(Model.Nombreimagen)</b>?</p>
+    @if (System.IO.File.Exists($"{env.WebRootPath}/images/{Model.Nombreimagen}"))
+    {
+    <img  style="color:white;width:300px;height:300px; margin-left:320px" id="imagePreview" src="~/images/@(Model.Nombreimagen)" alt="Vista previa de la imagen"> }
+    else
+    {
+    <img style="color:white;width:300px;height:300px; margin-left:320px" id="imagePreview" src="~/img/NotFound.png" alt="Vista previa de la imagen">}
+    <br />
+    <form method="post" asp-area="Admin" asp-controller="Flores" asp-action="EliminarImagen">
+        <input asp-for="Nombreimagen" value="@(Model.Nombreimagen)" hidden />
+        <input asp-for="Idimagen" value="@(Model.Idimagen)" hidden />
+        <p style="color:red;text-align:center; font-size:15px">
+            @Html.ValidationSummary()
+        </p>
+        <div style="float:right">
+            <input style="float:left;width:100px;margin:auto" type="submit" value="Eliminar">
+            <a href="~/admin/" style=" line-height: 18px; width: 100px; height: 18px; display: block; text-align: center; text-decoration: none; background-color: #3c83bc; color: white; padding: 5px; border: 1px solid black; float: left; margin-left:20px ">
+                Regresar
+            </a>
+        </div>
+
+
+    </form>
+
+</div>

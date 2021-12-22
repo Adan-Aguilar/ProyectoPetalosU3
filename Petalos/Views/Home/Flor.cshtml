@@ -1,0 +1,47 @@
+﻿@model Petalos.Models.ViewModels.FloresViewModel
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+@{
+    Layout = "_Layout";
+}
+
+<section class="post">
+    <h2>@Model.FlorUnica.Nombre</h2>
+
+    <h4>Nombre científico o latino:</h4>
+    <p>@Model.FlorUnica.Nombrecientifico</p>
+    <h4>Nombre común:</h4>
+    <p>@Model.FlorUnica.Nombrecomun</p>
+    <h4>Origen:</h4>
+    <p>@Model.FlorUnica.Origen</p>
+    <h4>Descripción:</h4>
+    <p>
+        @Model.FlorUnica.Descripcion
+    </p>
+
+    <div id="imagenes">
+        @foreach (var florImagen in Model.FlorUnica.Imagenesflores)
+        {
+            @if (System.IO.File.Exists($"{env.WebRootPath}/images/{florImagen.Nombreimagen}"))
+            {
+                <img title="@Model.FlorUnica.Nombre" src="~/images/@(florImagen.Nombreimagen)"> }
+            else
+            {
+                <img title="@Model.FlorUnica.Nombre" src="~/img/NotFound.png">}
+
+        }
+    </div>
+</section>
+<aside>
+    <nav>
+        <h2>Menú</h2>
+        <ul>
+            @foreach (var cuatro in Model.CuatroFlores)
+            {
+                <li><a href="~/informacion/@cuatro.Nombre.Replace(" ","-")">@cuatro.Nombre</a></li>
+            }
+        </ul>
+    </nav>
+</aside>
+
+

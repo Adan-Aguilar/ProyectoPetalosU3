@@ -1,0 +1,23 @@
+﻿@model Petalos.Areas.Models.ViewModels.FloresCrud
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+@{
+    Layout = "_Layout";
+}
+<h2 class="titulo">Editar flor</h2>
+<form method="post" asp-area="Admin" asp-action="EditarFlor" asp-controller="Flores">
+    <input hidden asp-for="Flores.Idflor" />
+    <label>Nombre:</label><input asp-for="Flores.Nombre" type="text" /><br />
+    <label>Nombre Cientifico:</label><input asp-for="Flores.Nombrecientifico" type="text" /><br />
+    <label>Nombre Común:</label><input asp-for="Flores.Nombrecomun" type="text" /><br />
+    <label>Origen:</label><input asp-for="Flores.Origen" type="text" /><br />
+    <label>Descripción:</label><textarea asp-for="Flores.Descripcion" rows="5"></textarea><br />
+    <p style="color:red;font-size:15px">
+        @Html.ValidationSummary()
+    </p>
+    <input type="submit" value="Guardar" />
+    <a href="~/admin/" style=" line-height: 18px; width: 100px; height: 18px; display: block; text-align: center; text-decoration: none; background-color: #3c83bc; color: white; padding: 5px; border: 1px solid black; float: right; margin-top:100px; margin-left:20px ">
+        Regresar
+    </a>
+</form>
+

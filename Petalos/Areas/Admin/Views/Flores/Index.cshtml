@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Petalos.Models.Datosflore>
+@{
+    Layout = "_Layout";
+}
+
+<h2 class="titulo">LISTA DE FLORES</h2>
+
+<p>
+    <a class="button" href="~/Admin/Flores/AgregarFlor">Agregar Flor</a>
+    <a class="button" href="/">Salir</a>
+</p>
+
+<div class="entrada">
+
+    <table id="tablaFlores" style="width: 100%;">
+        <tr style="background: pink;">
+            <th>Flor</th>
+            <th style="width: 60%">Acción</th>
+        </tr>
+
+        @foreach (var f in Model)
+        {
+            <tr>
+                <td>@f.Nombre</td>
+                <td>
+                    <a href="~/Admin/Flores/AgregarImagenes/@(f.Idflor)">Agregar Imagenes</a>
+                    <a href='~/Admin/Flores/EditarFlor/@(f.Idflor)'>Editar</a>
+                    <a href='~/Admin/Flores/EliminarFlor/@(f.Idflor)'>Eliminar</a>
+                </td>
+            </tr>
+        }
+
+
+
+
+    </table>
+    @*<a  style=" line-height: 18px; width: 100px; height: 18px; display: block; text-align: center; text-decoration: none; background-color: #3c83bc; color: white; padding: 5px; border: 1px solid black; float: right; margin-top:40px; margin-left:20px " href="~/Admin/Flores/AgregarImagenes">Agregar Imagenes</a>*@
+
+    <div id="popConfirmacion" class="popup" runat="server">
+        <div>
+            <h1>Por favor confirme:</h1>
+            <p id="mensajeConfirmacion" runat="server">¿Está seguro de eliminar los datos e imagenes de la flor seleccionada?</p>
+            <input type="button" value="Si" />
+            <input type="button" value="No" />
+        </div>
+    </div>
+
+</div>
+
